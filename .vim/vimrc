@@ -1,0 +1,253 @@
+set nocompatible
+set background=dark
+colorscheme torte
+set comments+=b:\"
+set tabstop=8
+set shiftwidth=4
+set softtabstop=4
+set smarttab
+set autoindent
+set expandtab
+syntax on
+filetype on
+filetype indent on
+set showmatch
+set nohls
+set incsearch
+set title
+"set term=xterm-256color
+set backspace=eol,start,indent
+set whichwrap=h,l,~,[,]
+set ignorecase
+set smartcase
+set mouse=""
+set fileformat=unix
+fixdel
+set showmode
+set showcmd
+set matchpairs=(:),{:},[:]
+set ruler
+set vb t_vb=
+set wildchar=<Tab>              " type tab in cmdline to start wildcard expansion
+set wildmenu                    " enhanced cmdline completion
+set wildignore=*.dll,*.o,*.pyc,*.bak,*.exe,*.jpg,*.jpeg,*.png,*.gif,*$py.class
+set wildmode=longest:full,full  " cmdline completion mode settings
+set writebackup                 " make a file backup before overwriting it
+set hidden                      " allow modified buffers to be hidden
+autocmd BufRead *.txt,*.tex setlocal spell spelllang=en_us
+autocmd FileType make setlocal noexpandtab shiftwidth=8
+
+" tell taglist not to change window size
+"set Tlist_Inc_Winwidth=0
+
+" keep some more lines for scope
+set scrolloff=5
+
+" utf-8 default encoding
+set enc=utf-8
+
+" Move Backup Files to ~/.vim/sessions
+set backupdir=~/.vim/sessions
+set backupext=.bak
+set dir=~/.vim/sessions
+
+" Toggle spell-checking
+map <leader>ss :setlocal spell!<cr>
+
+" Toggle paste mode
+map <leader>pp :setlocal paste!<cr>
+
+" Tab configuration
+map <leader>tn :tabnew<cr>
+map <leader>te :tabedit
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+
+" Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Specify the behavior when switching between buffers 
+try
+  set switchbuf=usetab
+  set stal=2
+catch
+endtry
+
+" don't move the cursor after pasting:tabp
+" (by jumping to back start of previously changed text):tabp
+noremap p p`[
+noremap P P`[
+
+" Use <enter> & <shift>-<enter> to add new lines w/o entering insert mode
+noremap <S-Return> O<ESC>
+noremap <Return> o<ESC>
+
+"Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
+nmap <D-j> <M-j>
+nmap <D-k> <M-k>
+vmap <D-j> <M-j>
+vmap <D-k> <M-k>
+
+" Trixie shit to automagically close matchedpairs & quotes
+" from http://concisionandconcinnity.blogspot.com/2009/07/vim-part-ii-matching-pairs.html
+inoremap ( ()<Left>
+inoremap [ []<Left>
+inoremap { {}<Left>
+autocmd Syntax html,vim inoremap < <lt>><Left>
+
+function! ClosePair(char)
+  if getline('.')[col('.') - 1] == a:char
+    return "\<Right>"
+  else
+    return a:char
+  endif
+endf
+
+inoremap ) <c-r>=ClosePair(')')<CR>
+inoremap ] <c-r>=ClosePair(']')<CR>
+inoremap } <c-r>=ClosePair('}')<CR>
+autocmd Syntax html,vim inoremap > <c-r>=ClosePair('>')<CR>
+
+function! QuoteDelim(char)
+  let line = getline('.')
+  let col = col('.')
+  if line[col - 2] == "\\"
+    "Inserting a quoted quotation mark into the string
+    return a:char
+  elseif line[col - 1] == a:char
+    "Escaping out of the string
+    return "\<Right>"
+  else
+    "Starting a string
+    return a:char.a:char."\<Left>"
+  endif
+endf
+
+inoremap " <c-r>=QuoteDelim('"')<CR>
+inoremap ' <c-r>=QuoteDelim("'")<CR>
+inoremap ` <c-r>=QuoteDelim('`')<CR>
+
+" Use 'P<symbol>' to surround highlited text w/ symbol pair
+vnoremap P(  <ESC>`>a)<ESC>`<i(<ESC>
+vnoremap P)  <ESC>`>a)<ESC>`<i(<ESC>
+vnoremap P[  <ESC>`>a]<ESC>`<i[<ESC>
+vnoremap P]  <ESC>`>a]<ESC>`<i[<ESC>
+vnoremap P{  <ESC>`>a}<ESC>`<i{<ESC>
+vnoremap P}  <ESC>`>a}<ESC>`<i{<ESC>
+vnoremap P"  <ESC>`>a"<ESC>`<i"<ESC>
+vnoremap P'  <ESC>`>a'<ESC>`<i'<ESC>
+vnoremap P`  <ESC>`>a`<ESC>`<i`<ESC>
+" In visual mode when you press * or # to search for the current selection
+vnoremap <silent> * :call VisualSearch('f')<CR>
+vnoremap <silent> # :call VisualSearch('b')<CR>
+
+function! BackSpaceEmptyPair()
+  let between = strpart(getline('.'),col('.')-2,2)
+  let rightof = strpart(getline('.'),col('.')-3,2)
+  for pair in (split(&matchpairs,',') + ['":"',"':'",'`:`'])
+    let emptypair = join(split(pair,':'),'')
+    if between == emptypair
+      return "\<Right>\<BS>\<BS>"
+    elseif rightof == emptypair
+      return "\<BS>\<BS>"
+    endif
+  endfor
+  return "\<BS>"
+endfunc
+inoremap <expr> <BS> BackSpaceEmptyPair()
+
+function! DeleteEmptyPair()
+  let between = strpart(getline('.'),col('.')-2,2)
+  let leftof = strpart(getline('.'),col('.')-1,2)
+  for pair in (split(&matchpairs,',') + ['":"',"':'",'`:`'])
+    let emptypair = join(split(pair,':'),'')
+    if between == emptypair
+      return "\<Left>\<DEL>\<DEL>"
+    elseif leftof == emptypair
+      return "\<DEL>\<DEL>"
+    endif
+  endfor
+  return "\<DEL>"
+endfunc
+inoremap <expr> <DEL> DeleteEmptyPair()
+
+" Source ~/.vimrc.local if it exists
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif
+
+" python support
+" --------------
+autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8
+\ formatoptions+=croq softtabstop=4 smartindent textwidth=79
+" \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+" \ omnifunc=pythoncomplete#Complete
+" Type :make and get a list of syntax errors, :cn and :cp to move around
+" the error list, and :clist to see all the errors.
+\ makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
+\ efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
+let python_highlight_all=1
+let python_slow_sync=1
+inoremap <Nul> <C-x><C-o>
+
+" Type :make and get a list of syntax errors, :cn and :cp to move around
+" the error list, and :clist to see all the errors.
+" autocmd BufRead *.py set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
+" autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m 
+
+" ruby support
+autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+
+" go support
+autocmd BufNewFile,BufRead *.go setlocal ft=go
+autocmd FileType go setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4
+
+" php support
+autocmd FileType php setlocal shiftwidth=8 tabstop=8 softtabstop=8
+
+" template language support (SGML / XML too)
+autocmd FileType html,xhtml,xml,htmldjango,htmljinja,eruby,mako setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+
+" Verilog
+autocmd FileType verilog setlocal expandtab shiftwidth=2 tabstop=8 softtabstop=2
+
+" CSS
+autocmd FileType css setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+
+" Java
+autocmd FileType java setlocal shiftwidth=2 tabstop=8 softtabstop=2
+
+" rst
+autocmd BufNewFile,BufRead *.txt setlocal ft=rst
+autocmd FileType rst setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+\ formatoptions+=nqt textwidth=74
+
+" tex
+autocmd BufNewFile,BufRead *.tex setlocal ft=tex
+autocmd FileType tex setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4 textwidth=74
+
+" C#
+autocmd FileType cs setlocal tabstop=4 softtabstop=4 shiftwidth=4
+
+" C/C++
+autocmd FileType c setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+autocmd FileType cpp setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+
+" vim
+autocmd FileType vim setlocal expandtab shiftwidth=2 tabstop=8 softtabstop=2
+
+" Javascript
+autocmd FileType javascript setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+let javascript_enable_domhtmlcss=1
+
+" D
+autocmd FileType d setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4
