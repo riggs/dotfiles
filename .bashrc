@@ -2,7 +2,6 @@ export TERM=xterm-color
 export PATH=${PATH}:/usr/sbin/:/usr/local/bin/:~/bin/
 export MANPATH=${MANPATH:-}:/usr/local/man
 export CLICOLOR=1
-export PYTHONPATH=${PYTHONPATH}:~/python:.
 export PYTHONSTARTUP=~/.pythonrc.py
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
 
@@ -63,6 +62,14 @@ touch ~/.bookmarks
 source ~/.bookmarks
 
 # Turn on advanced bash completion if the file exists (get it here: http://www.caliban.org/bash/index.shtml#completion)
-if [ -f /opt/local/etc/bash_completion ]; then
-    . /opt/local/etc/bash_completion
+if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
+    . /opt/local/etc/profile.d/bash_completion.sh
 fi
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+# Setup environment for virtualenv
+test -f ~/.virtualenvwrapperrc && source ~/.virtualenvwrapperrc
+
+# vim: set ts=8 sw=4 tw=0 et filetype=sh :
