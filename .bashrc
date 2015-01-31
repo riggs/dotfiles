@@ -1,5 +1,5 @@
 export TERM=xterm-color
-export PATH=${PATH}:/usr/sbin/:/usr/local/bin/:~/bin/
+export PATH=${PATH}:/usr/sbin/:~/bin/
 export MANPATH=${MANPATH:-}:/usr/local/man
 export CLICOLOR=1
 export PYTHONSTARTUP=~/.pythonrc.py
@@ -31,8 +31,28 @@ export COLOR_GRAY='\e[1;30m'
 export COLOR_LIGHT_GRAY='\e[0;37m'
 alias colorslist="set | egrep 'COLOR_\w*'"  # Lists all the colors, uses vars in .bashrc_non-interactive
 
-pkill() { kill `ps -axo pid,command,args | grep -i $1 | awk '{ print $1 }' | tr '\n' ' '`; }
-mvim() { ~/bin/mvim --servername VIM --remote-tab-wait-silent $* & }
+pkill () { kill `ps -axo pid,command,args | grep -i $1 | awk '{ print $1 }' | tr '\n' ' '`; }
+mvim () 
+{ 
+    opts=;
+    files=;
+    for arg in "$@";
+    do
+        case $arg in 
+            -* | +*)
+                opts="$opts $arg"
+            ;;
+            *)
+                files="$files $arg"
+            ;;
+        esac;
+    done;
+    if [ "$files" ]; then
+        files="--remote-tab-wait-silent $files";
+    fi
+    `which mvim` --servername VIM $opts $files &
+}
+
 alias ..='cd ..'
 alias la='ls -A'
 alias ll='ls -lh'
@@ -70,6 +90,11 @@ fi
 export PATH="/usr/local/heroku/bin:$PATH"
 
 # Setup environment for virtualenv
-test -f ~/.virtualenvwrapperrc && source ~/.virtualenvwrapperrc
+# NOPE NOPE NOPE NOPE
+# test -f ~/.virtualenvwrapperrc && source ~/.virtualenvwrapperrc
+
+# Updated PATH environment variable for use with MacPorts.
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+
 
 # vim: set ts=8 sw=4 tw=0 et filetype=sh :
