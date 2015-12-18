@@ -81,6 +81,9 @@ endtry
 noremap p p`[
 noremap P P`[
 
+" Exit insert mode with 'jj' instead of <ESC>
+inoremap jj <ESC>
+
 " Use <enter> & <shift>-<enter> to add new lines w/o entering insert mode
 noremap <S-Return> O<ESC>
 noremap <Return> o<ESC>
@@ -187,6 +190,7 @@ endif
 " python support
 " --------------
 autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8
+\ commentstring=#\ %s
 \ formatoptions+=croq softtabstop=4 smartindent textwidth=79
 " \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 " \ omnifunc=pythoncomplete#Complete
@@ -244,6 +248,7 @@ autocmd FileType cpp setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 
 " vim
 autocmd FileType vim setlocal expandtab shiftwidth=2 tabstop=8 softtabstop=2
+\ commentstring=\"\ %s
 
 " Javascript
 autocmd FileType javascript setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
@@ -251,3 +256,15 @@ let javascript_enable_domhtmlcss=1
 
 " D
 autocmd FileType d setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4
+
+" Append modeline after last line in buffer.
+" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
+" files.
+set modeline modelines=5
+function! AppendModeline()
+  let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set filetype=%s :",
+        \ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no', &filetype)
+  let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
+  call append(line("$"), l:modeline)
+endfunction
+nnoremap <silent> <Leader>ml :call AppendModeline()<CR>

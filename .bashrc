@@ -2,7 +2,6 @@ export TERM=xterm-color
 export PATH=${PATH}:/usr/sbin/:/usr/local/bin/:~/bin/
 export MANPATH=${MANPATH:-}:/usr/local/man
 export CLICOLOR=1
-export PYTHONPATH=${PYTHONPATH}:~/python:.
 export PYTHONSTARTUP=~/.pythonrc.py
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
 
@@ -47,22 +46,9 @@ export LESS="-R"
 export EDITOR=vim
 export HISTCONTROL=ignoredups
 
-# Bash Directory Bookmarks
-alias m1='alias g1="cd `pwd`"'
-alias m2='alias g2="cd `pwd`"'
-alias m3='alias g3="cd `pwd`"'
-alias m4='alias g4="cd `pwd`"'
-alias m5='alias g5="cd `pwd`"'
-alias m6='alias g6="cd `pwd`"'
-alias m7='alias g7="cd `pwd`"'
-alias m8='alias g8="cd `pwd`"'
-alias m9='alias g9="cd `pwd`"'
-alias mdump='alias|grep -e "alias g[0-9]"|grep -v "alias m" > ~/.bookmarks'
-alias lma='alias | grep -e "alias g[0-9]"|grep -v "alias m"|sed "s/alias //"'
-touch ~/.bookmarks
-source ~/.bookmarks
-
 # Turn on advanced bash completion if the file exists (get it here: http://www.caliban.org/bash/index.shtml#completion)
 if [ -f /opt/local/etc/bash_completion ]; then
     . /opt/local/etc/bash_completion
 fi
+
+# vim: set ts=8 sw=4 tw=0 et filetype=sh :
