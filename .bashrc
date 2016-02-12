@@ -60,6 +60,7 @@ alias lla='ls -lah'
 alias ssy='ssh -Y'
 alias tar=/usr/bin/tar
 alias top='top -o cpu'
+alias fix='echo -e "\033c"'
 PS1=$'\[\e]2;[bash]   \h::\]$PWD\[\a\]\[\e]1;\]$(basename "$(dirname "$PWD")")/\W\[\a\][\u@\h \W]\$ '
 
 export LESS="-R"
