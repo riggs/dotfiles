@@ -83,6 +83,6 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 
 # emscripten tools
-source ~/code/emsdk_portable/emsdk_env.sh
+source ~/code/emsdk_portable/emsdk_env.sh &> /dev/null
 
 # vim: set ts=8 sw=4 tw=0 et filetype=sh :
