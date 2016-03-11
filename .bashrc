@@ -82,4 +82,7 @@ export PATH="/usr/local/heroku/bin:$PATH"
 # Updated PATH environment variable for use with MacPorts.
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 
+# emscripten tools
+source ~/code/emsdk_portable/emsdk_env.sh
+
 # vim: set ts=8 sw=4 tw=0 et filetype=sh :
