@@ -1,6 +1,7 @@
 export TERM=xterm-color
 export PATH=${PATH}:/usr/sbin/:~/bin/
 export MANPATH=${MANPATH:-}:/usr/local/man
+export HISTFILESIZE=100000
 export CLICOLOR=1
 export PYTHONSTARTUP=~/.pythonrc.py
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
@@ -83,6 +84,6 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 
 # emscripten tools
-source ~/code/emsdk_portable/emsdk_env.sh &> /dev/null
+# source ~/code/emsdk_portable/emsdk_env.sh &> /dev/null
 
 # vim: set ts=8 sw=4 tw=0 et filetype=sh :
