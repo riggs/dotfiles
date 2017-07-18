@@ -86,4 +86,7 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 # emscripten tools
 # source ~/code/emsdk_portable/emsdk_env.sh &> /dev/null
 
+# ARM embedded gcc toolchain location
+export ARMGCC_DIR=/opt/gcc-arm-none-eabi-6-2017-q2-update
+
 # vim: set ts=8 sw=4 tw=0 et filetype=sh :
