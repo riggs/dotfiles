@@ -89,4 +89,7 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 # ARM embedded gcc toolchain location
 export ARMGCC_DIR=/opt/gcc-arm-none-eabi-6-2017-q2-update
 
+# AVR compiler
+export PATH=$PATH:/usr/local/CrossPack-AVR/bin
+
 # vim: set ts=8 sw=4 tw=0 et filetype=sh :
