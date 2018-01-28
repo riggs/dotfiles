@@ -92,4 +92,7 @@ export ARMGCC_DIR=/opt/gcc-arm-none-eabi-6-2017-q2-update
 # AVR compiler
 export PATH=$PATH:/usr/local/CrossPack-AVR/bin
 
+# Run stuff from NPM without installing it globally
+function npm-do { (PATH=$(npm bin):$PATH; eval $@;) }
+
 # vim: set ts=8 sw=4 tw=0 et filetype=sh :
