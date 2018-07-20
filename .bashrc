@@ -74,7 +74,7 @@ if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
 fi
 
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+export PATH=/usr/local/heroku/bin:$PATH
 
 # Setup environment for virtualenv
 # NOPE NOPE NOPE NOPE
@@ -82,6 +82,7 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 # Updated PATH environment variable for use with MacPorts.
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export MANPATH=/opt/local/share/man:$MANPATH
 
 # emscripten tools
 # source ~/code/emsdk_portable/emsdk_env.sh &> /dev/null
@@ -91,6 +92,9 @@ export ARMGCC_DIR=/opt/gcc-arm-none-eabi-6-2017-q2-update
 
 # AVR compiler
 export PATH=$PATH:/usr/local/CrossPack-AVR/bin
+
+# rust-lang pacckage manager
+export PATH=~/.cargo/bin:$PATH
 
 # Run stuff from NPM without installing it globally
 function npm-do { (PATH=$(npm bin):$PATH; eval $@;) }
