@@ -91,7 +91,7 @@ export MANPATH=/opt/local/share/man:$MANPATH
 export ARMGCC_DIR=/opt/gcc-arm-none-eabi-6-2017-q2-update
 
 # AVR compiler
-export PATH=$PATH:/usr/local/CrossPack-AVR/bin
+#export PATH=$PATH:/usr/local/CrossPack-AVR/bin
 
 # rust-lang pacckage manager
 export PATH=~/.cargo/bin:$PATH
