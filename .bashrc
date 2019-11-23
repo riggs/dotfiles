@@ -132,8 +132,8 @@ export PATH=/usr/local/opt/sqlite/bin:$PATH
 # test -f ~/.virtualenvwrapperrc && source ~/.virtualenvwrapperrc
 
 # Updated PATH environment variable for use with MacPorts.
-#export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-#export MANPATH=/opt/local/share/man:$MANPATH
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export MANPATH=/opt/local/share/man:$MANPATH
 
 # emscripten tools
 # source ~/code/emsdk_portable/emsdk_env.sh &> /dev/null
