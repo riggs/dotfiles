@@ -155,7 +155,7 @@ export PATH=$PATH:~/Library/Python/3.7/bin
 #export PATH=$PATH:/opt/local/Library/Frameworks/Python.framework/Versions/Current/bin
 
 # Used by zephyr, among others
-export GNUARMEMB_TOOLCHAIN_PATH=/usr/local/gcc-arm-none-eabi-7-2018-q2-update
+export GNUARMEMB_TOOLCHAIN_PATH=/usr/local/gcc-arm-none-eabi-8-2019-q3-update
 
 export PATH=$PATH:/Users/riggs/.nexustools
 
