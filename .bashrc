@@ -118,8 +118,8 @@ export LESS="-R"
 export EDITOR=vim
 export HISTCONTROL=ignoredups
 
-# Turn on advanced bash completion if the file exists (get it here: http://www.caliban.org/bash/index.shtml#completion)
-[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+# Turn on advanced bash completion if the file exists
+[[ -r "/usr/local/etc/profile.d/bash_completion" ]] && . "/usr/local/etc/profile.d/bash_completion"
 
 ### Added by the Heroku Toolbelt
 export PATH=/usr/local/heroku/bin:$PATH
