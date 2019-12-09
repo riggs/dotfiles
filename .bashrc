@@ -61,7 +61,7 @@ alias lla='ls -lah'
 alias ssy='ssh -Y'
 alias tar=/usr/bin/tar
 alias top='top -o cpu'
-alias fix='echo -e "\033c"'
+alias fix='echo -e "\033c" && reset'
 
 # via http://ezprompt.net/
 # get current branch in git repo
