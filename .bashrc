@@ -119,7 +119,7 @@ export EDITOR=vim
 export HISTCONTROL=ignoredups
 
 # Turn on advanced bash completion if the file exists
-[[ -r "/usr/local/etc/profile.d/bash_completion" ]] && . "/usr/local/etc/profile.d/bash_completion"
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
 ### Added by the Heroku Toolbelt
 export PATH=/usr/local/heroku/bin:$PATH
