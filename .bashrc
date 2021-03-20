@@ -131,10 +131,6 @@ export PATH=/usr/local/opt/sqlite/bin:$PATH
 # NOPE NOPE NOPE NOPE
 # test -f ~/.virtualenvwrapperrc && source ~/.virtualenvwrapperrc
 
-# Updated PATH environment variable for use with MacPorts.
-export PATH=$PATH:/opt/local/bin:/opt/local/sbin
-export MANPATH=$MANPATH:/opt/local/share/man
-
 # emscripten tools
 # source ~/code/emsdk_portable/emsdk_env.sh &> /dev/null
 
@@ -142,17 +138,17 @@ export MANPATH=$MANPATH:/opt/local/share/man
 #export ARMGCC_DIR=/opt/gcc-arm-none-eabi-6-2017-q2-update
 
 # AVR compiler
-export PATH=$PATH:/usr/local/CrossPack-AVR/bin
+#export PATH=$PATH:/usr/local/CrossPack-AVR/bin
 
 # rust-lang pacckage manager
 export PATH=~/.cargo/bin:$PATH
 
+# Python bin path
+export PATH=$PATH:~/Library/Python/3.8/bin
+#export PATH=$PATH:/opt/local/Library/Frameworks/Python.framework/Versions/Current/bin
+
 # Run stuff from NPM without installing it globally
 function npm-do { (PATH=$(npm bin):$PATH; eval $@;) }
-
-# Python bin path
-export PATH=$PATH:~/Library/Python/3.7/bin
-#export PATH=$PATH:/opt/local/Library/Frameworks/Python.framework/Versions/Current/bin
 
 # Used by zephyr, among others
 #export GNUARMEMB_TOOLCHAIN_PATH=/usr/local/gcc-arm-none-eabi-8-2019-q3-update
