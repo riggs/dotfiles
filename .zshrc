@@ -133,3 +133,8 @@ prompt_context() {
     prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
   fi
 }
+
+# Use arm gcc with Zephyr
+export ZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb
+export GNUARMEMB_TOOLCHAIN_PATH="/usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07"
+
