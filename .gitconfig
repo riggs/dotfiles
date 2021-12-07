@@ -2,3 +2,5 @@
 [user]
 	name = Benjamin Riggs
 	email = deisum@gmail.com
+[core]
+	excludesfile = /Users/riggs/.config/git/ignore
