@@ -4,3 +4,5 @@
 	email = deisum@gmail.com
 [core]
 	excludesfile = /Users/riggs/.config/git/ignore
+[init]
+	defaultBranch = main
