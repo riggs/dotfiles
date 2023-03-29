@@ -1,7 +1,9 @@
-set -gx PATH /Users/riggs/Library/Python/3.9/bin /opt/homebrew/bin /usr/local/bin /usr/bin /bin /usr/sbin /sbin /Users/riggs/.local/bin
-set -gx ZEPHYR_TOOLCHAIN_VARIANT gnuarmemb
-set -gx GNUARMEMB_TOOLCHAIN_PATH /Applications/ARM
-set -gx PYTHONSTARTUP ~/.pythonrc.py
+fish_add_path -a /Users/riggs/Library/Python/3.9/bin
+fish_add_path -a /opt/homebrew/bin
+fish_add_path -a /Users/riggs/.local/bin
+fish_add_path -a /Users/riggs/.dotnet/tools
+fish_add_path -a /opt/homebrew/opt/postgresql@15/bin
+fish_add_path -a /Users/riggs/VulkanSDK/1.3.231.1/macOS/bin
 
 if status is-interactive
     function mvim
